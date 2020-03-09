@@ -5,7 +5,8 @@ import java.util.List;
 public class Student extends Person {
 	String group;	
 	Account account;
-	List<CourseEnum> course;
+	Course courses;
+	
 	
 	//constructor
 	public Student(String firstName, String lastNAme,String group) {
@@ -21,18 +22,11 @@ public class Student extends Person {
 	
 	public void setAccount(String username, String password)
 	{
-		account = new Account(username, password);
-		
+		account = new Account(username, password);		
 	}
 	
-	public List<CourseEnum> getCourseEnum()
-	{
-		course = new ArrayList<CourseEnum>();
-		course.add(CourseEnum.JAVA);
-		course.add(CourseEnum.PHP);
-		course.add(CourseEnum.SQL);
-		course.add(CourseEnum.CSHARP);
-		return course;
-	}
+	
+	
+	int abc = CourseEnum.JAVA.getCode();
 
 }

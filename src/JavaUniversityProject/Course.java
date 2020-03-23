@@ -1,47 +1,45 @@
 package JavaUniversityProject;
 
-import java.util.ArrayList;
-//import java.util.ArrayList;
-import java.util.List;
-import java.lang.Math;
+import java.util.Hashtable;
 import java.util.Random;
 
-public class Course {
+public class Course {	
 	
-	List<Course> course;
-	public int Java ,SQL ,Php,Csharp;
-	ArrayList<String> courseList;
-//	public Course(){
-//		this.Java = CourseEnum.JAVA.getCode();
-//		this.SQL = CourseEnum.SQL.getCode();
-//		this.Php = CourseEnum.PHP.getCode();
-//		this.Csharp = CourseEnum.CSHARP.getCode();		
-//	}
+	public int courseGrade;
+	public CourseEnum courseName;	
+	public Hashtable<CourseEnum, Integer> gradedCourses;
 	
+	public Course()
+	{
+		this.gradedCourses = new Hashtable<CourseEnum, Integer>();
+		this.gradedCourses=	getGradedCourses(this.gradedCourses);	//pass empty hash-table and get a filled on return
+	}
+	
+	public int setGrade() {
+		//get some random grade between 30 and 100
+		this.courseGrade = setRandomGradeInRange(30, 100); 
+		return this.courseGrade;
+	}
 
-	public ArrayList<String> setCourseGrades(int grade)
-	{
-	    int i =9;
-		courseList.add(CourseEnum.JAVA.getName());
-		courseList.add(CourseEnum.SQL.getName());
-		courseList.add(CourseEnum.PHP.getName());
-		courseList.add(CourseEnum.CSHARP.getName());
-		return courseList;
+	
+	public Hashtable<CourseEnum, Integer> getGradedCourses(Hashtable<CourseEnum, Integer> gradedCourses) {		
+		//set the grade for every courses 
+		this.courseGrade = setRandomGradeInRange(30, 100); 
+		gradedCourses.put(CourseEnum.CSHARP, setGrade());
+		gradedCourses.put(CourseEnum.JAVA, setGrade());
+		gradedCourses.put(CourseEnum.PHP, setGrade());
+		gradedCourses.put(CourseEnum.SQL, setGrade());
+		return gradedCourses;
 	}
 	
-	public ArrayList<String> setJavaGrades(int grade)
-	{
 	
-	}
-	
-	public int GetRandomGrade() {
-		double rand = Math.random();
-		int rndGrade=(int)(rand* 45+56)
-	}
-	
-	public void getCourseEnum()
-	{
-		
+	private static int setRandomGradeInRange(int min, int max) {
+
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
 	}
 
 }

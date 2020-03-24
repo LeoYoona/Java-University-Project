@@ -8,7 +8,7 @@ public abstract class Person {
 	protected String firstname; 
 	protected String lastname; 
 	protected LocalDate birthdate;
-	protected UserAccessLevel accesslvl = UserAccessLevel.Basic;
+	public UserAccessLevel accesslvl = UserAccessLevel.Basic;
 	public Account account;
 	
 	public Person(String firstname, String lastname,String username, String password, int id,LocalDate birthdate, UserAccessLevel accesslvl) {

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class StartMain {
 	
 	Database db;
-	Person userLoggedIn;
+	Person loggedInUser;
 
 	public static void main(String[] args) {
 		
@@ -36,8 +36,7 @@ public class StartMain {
 			if(loggedInUser != null ) 
 			{
 				System.out.println("Successfully logged in!");
-				loggedInUser = db.loggedInUser;
-				String choice = showMenu();
+				String choice = showMenu(loggedInUser);
 				processCommand(choice);
 			}
 			else {
@@ -49,12 +48,12 @@ public class StartMain {
 	
 	//this prints the menu depending on the accesslvl of the user
 	//and also returns a choice of the user 
-	public String showMenu() {
-		if(userLoggedIn.accesslvl == UserAccessLevel.Basic) {
+	public String showMenu(Person loggedInUser) {
+		if(loggedInUser.accesslvl == UserAccessLevel.Basic) {
 			System.out.println(String.format("S. Display Students   |") + String.format("   S. Display Teachers   |") + String.format("   X. Exit"));
 		}
 		
-		else if (userLoggedIn.accesslvl == UserAccessLevel.Editor) {
+		else if (loggedInUser.accesslvl == UserAccessLevel.Editor) {
 			System.out.println(String.format("S. Display Students   |") + String.format("   S. Display Teachers   |") + String.format("   A. Add Students   |") 
 			+ String.format("   R. Display Reports   |") + String.format("   X. Exit") );
 		}

@@ -40,7 +40,7 @@ public class Student extends Person {
 	}
 	
 	private void printGrades() {
-		System.out.print(pad(getGrade(CourseEnum.CSHARP), 8) + pad(getGrade(CourseEnum.JAVA), 8) + 
+		System.out.print(pad(getGrade(CourseEnum.JAVA), 8) + pad(getGrade(CourseEnum.CSHARP), 8) + 
 		pad(getGrade(CourseEnum.SQL), 8) + pad(getGrade(CourseEnum.PHP), 8));
 	}
 	

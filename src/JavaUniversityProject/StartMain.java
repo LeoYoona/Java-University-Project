@@ -50,15 +50,15 @@ public class StartMain {
 	//and also returns a choice of the user 
 	public String showMenu(Person loggedInUser) {
 		if(loggedInUser.accesslvl == UserAccessLevel.Basic) {
-			System.out.println(String.format("S. Display Students   |") + String.format("   S. Display Teachers   |") + String.format("   X. Exit"));
+			System.out.println(String.format("S. Display Students   |") + String.format("   T. Display Teachers   |") + String.format("   X. Exit"));
 		}
 		
 		else if (loggedInUser.accesslvl == UserAccessLevel.Editor) {
-			System.out.println(String.format("S. Display Students   |") + String.format("   S. Display Teachers   |") + String.format("   A. Add Students   |") 
+			System.out.println(String.format("S. Display Students   |") + String.format("   T. Display Teachers   |") + String.format("   A. Add Students   |") 
 			+ String.format("   R. Display Reports   |") + String.format("   X. Exit") );
 		}
 		else {
-			System.out.println(String.format("S. Display Students   |") + String.format("   S. Display Teachers   |") + String.format("   A. Add Students   |") 
+			System.out.println(String.format("S. Display Students   |") + String.format("   T. Display Teachers   |") + String.format("   A. Add Students   |") 
 			+ String.format("   R. Display Reports   |") + String.format("   V. Save Reports   |") +String.format("   X. Exit") );
 		}
 		Scanner input = new Scanner(System.in);
@@ -73,7 +73,7 @@ public class StartMain {
 			printStudents(false);
 		}
 		else if(choice.equals("T")) {
-			//printTeachers();
+			printTeachers();
 		}
 		else {
 			System.out.println("Leaving the program now...");
@@ -103,5 +103,15 @@ public class StartMain {
 		}
 	}
 
+	public void printTeachers() {
+		System.out.println(String.format("%1$-5s", "Id") + String.format("%1$-15s", "FirstName") + String.format("%1$-15s", "LastName") +
+				String.format("%1$-15s", "BirthDate") + String.format("%1$-8s", "Age") + String.format("%1$-15s", "Salary"));
+		
+		ArrayList<Teacher> teachers = db.getTeachers();
+		for(Person u : teachers) {
+				Teacher t = (Teacher) u;
+				t.print();
+		}
+	}
 
 }

@@ -39,6 +39,8 @@ public class Student extends Person {
 		
 	}
 	
+	
+	
 	private void printGrades() {
 		System.out.print(pad(getGrade(CourseEnum.JAVA), 8) + pad(getGrade(CourseEnum.CSHARP), 8) + 
 		pad(getGrade(CourseEnum.SQL), 8) + pad(getGrade(CourseEnum.PHP), 8));
@@ -46,6 +48,13 @@ public class Student extends Person {
 	
 	
 	private void printData() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		String birthdateFormat = birthdate.format(formatter);
+		System.out.print(pad(id,5) + pad(firstname, 15) + pad(lastname, 15) +
+				pad(birthdateFormat, 15) + pad(getAge(), 8) + pad(group, 15));
+	}
+	
+	private void printIndvidualData() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		String birthdateFormat = birthdate.format(formatter);
 		System.out.print(pad(id,5) + pad(firstname, 15) + pad(lastname, 15) +

@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.time.*; 
-import java.time.temporal.ChronoUnit; 
+
 
 public class StartMain {
 
@@ -21,6 +20,7 @@ public class StartMain {
 
 	}
 
+	@SuppressWarnings("resource")
 	void Start() {
 		/* ecplise short cuts. 
 		 * ctrl+shift+/ to comment
@@ -75,6 +75,7 @@ public class StartMain {
 					+ String.format("   A. Add Students   |") + String.format("   R. Display Reports   |")
 					+ String.format("   V. Save Reports   |") + String.format("   X. Exit"));
 		}
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter choice: ");
 		String choice = input.nextLine();
@@ -82,6 +83,7 @@ public class StartMain {
 	}
 
 	// this will show the output according to user's choice
+	@SuppressWarnings("resource")
 	public Boolean processCommand(String choice, Person loggedInUser) {
 		if (choice.equals("S")) {
 			printStudents(false);
@@ -153,6 +155,7 @@ public class StartMain {
 		return true;
 	}
 
+	@SuppressWarnings("resource")
 	public void printStudents(boolean includeGrades) {
 
 		System.out.print(String.format("%1$-5s", "Id") + String.format("%1$-15s", "FirstName")
@@ -208,6 +211,19 @@ public class StartMain {
 				}
 			}
 		}
+	}
+	
+	
+	@SuppressWarnings("resource")
+	public void reportEdit(Database db, int studentId) {
+		while(true)
+		{
+			System.out.println("A. Add (Update) Student Report | R.Display Report | B. Back to Main Report |  X. Exit | \n"
+					+ "Please enter a choice: ");
+			Scanner input = new Scanner(System.in);
+			String choice = input.nextLine();
+		}
+		
 	}
 
 	public void printTeachers() {

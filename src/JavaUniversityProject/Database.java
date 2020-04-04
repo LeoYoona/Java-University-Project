@@ -87,10 +87,10 @@ public class Database {
 		for(Student s : studentList) 
 		{
 			if(s.id == choice ) 
-			{
-				
+			{				
 				System.out.println();
-				s.printReport();
+				//s.printReport();
+				s.printIndvidualData();
 				tf= true;
 			}
 		}

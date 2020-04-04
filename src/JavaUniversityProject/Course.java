@@ -24,7 +24,7 @@ public class Course {
 	
 	public Hashtable<CourseEnum, Integer> getGradedCourses(Hashtable<CourseEnum, Integer> gradedCourses) {		
 		//set the grade for every courses 
-		this.courseGrade = setRandomGradeInRange(30, 100); 
+		this.courseGrade = setRandomGradeInRange(20, 100); 
 		gradedCourses.put(CourseEnum.CSHARP, setGrade());
 		gradedCourses.put(CourseEnum.JAVA, setGrade());
 		gradedCourses.put(CourseEnum.PHP, setGrade());

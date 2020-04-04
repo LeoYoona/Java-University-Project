@@ -98,6 +98,48 @@ public class Database {
 		return tf;
 
 	}
+	
+	public String getSubjectGrade(int id, String subject)
+	{
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		studentList=getStudents();		
+		String grade="";
+		for(Student s : studentList) 
+		{
+			if(s.id == id ) 
+			{	
+				switch (subject) {
+				  case "java":
+					  grade= Integer.toString(s.getGrade(CourseEnum.JAVA));
+				    break;
+				  case "sql":
+					  grade= Integer.toString(s.getGrade(CourseEnum.SQL));
+					  break;
+				  case "csharp":
+					  grade= Integer.toString(s.getGrade(CourseEnum.CSHARP));
+					  break;
+				  case "php":
+					  grade= Integer.toString(s.getGrade(CourseEnum.PHP));
+					  break;
+				}
+				
+			}
+		}
+		return grade;
+	}
+	
+	public void editStudentGrade(int id,String subject, int grade) {
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		studentList=getStudents();	
+		for(Student s : studentList) 
+		{
+			if(s.id == id ) 
+			{	
+				s.editStudentGrade(subject, grade) ;
+			}
+		}
+		
+	}
 
 
 }

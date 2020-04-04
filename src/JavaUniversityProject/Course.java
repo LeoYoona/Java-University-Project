@@ -12,7 +12,7 @@ public class Course {
 	public Course()
 	{
 		this.gradedCourses = new Hashtable<CourseEnum, Integer>();
-		this.gradedCourses=	getGradedCourses(this.gradedCourses);	//pass empty hash-table and get a filled on return
+		this.gradedCourses=	getGradedCourses(this.gradedCourses);	
 	}
 	
 	public int setGrade() {

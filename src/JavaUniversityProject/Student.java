@@ -6,6 +6,7 @@ import java.util.Hashtable;
 public class Student extends Person {
 	String group;	
 	Course course;	
+	CourseEnum courseName;	
 	Hashtable<CourseEnum, Integer> gradedCourses;
 	
 	//constructor creates a students with its details and a hash-table of courses with their grades
@@ -51,6 +52,23 @@ public class Student extends Person {
 		String birthdateFormat = birthdate.format(formatter);
 		System.out.print(pad(id,5) + pad(firstname, 15) + pad(lastname, 15) +
 				pad(birthdateFormat, 15) + pad(getAge(), 8) + pad(group, 15));
+	}
+	
+	public void editStudentGrade(String subject, int grade) {
+		switch (subject) {
+		  case "java":
+			  gradedCourses.put(CourseEnum.JAVA, grade);
+		    break;
+		  case "sql":
+			  gradedCourses.put(CourseEnum.SQL, grade);
+			  break;
+		  case "csharp":
+			  gradedCourses.put(CourseEnum.CSHARP, grade);
+			  break;
+		  case "php":
+			  gradedCourses.put(CourseEnum.PHP, grade);
+			  break;
+		}
 	}
 	
 	public void printIndvidualData() {

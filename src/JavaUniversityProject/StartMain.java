@@ -185,7 +185,7 @@ public class StartMain {
 		{
 			System.out.println("\nEnter student ID (Report Deatils) | type 0 to go backto main menu: ");
 			Scanner input = new Scanner(System.in);
-			int choice=1;
+			int choice=0;
 			try {
 				choice= input.nextInt();
 			}
@@ -197,7 +197,7 @@ public class StartMain {
 			
 			
 			boolean idExists = true;
-			if((choice) == 0)
+			if((choice) == 0 )
 			{
 				break;
 			}

@@ -217,131 +217,100 @@ public class StartMain {
 	
 	@SuppressWarnings({ "resource", "unused" })
 	public void reportEdit(Database db, int studentId) {
-		while(true)
-		{
-			System.out.println("A. Add (Update) Student Report | R.Display Report | B. Back to Main Report |  X. Exit | \n"
-					+ "Please enter a choice: ");
+		while (true) {
+			System.out.println(
+					"A. Add (Update) Student Report | R.Display Report | B. Back to Main Report |  X. Exit | \n"
+							+ "Please enter a choice: ");
 			Scanner input = new Scanner(System.in);
 			String choice;
 			try {
 				choice = input.nextLine();
 				choice = choice.toUpperCase();
-			}
-			catch(InputMismatchException e)
-			{
+			} catch (InputMismatchException e) {
 				System.out.println("\nFatal Error! Input is not an Integer.\n");
 				break;
 			}
-			
-			if(choice.equals("A"))				
-			{
-				boolean on = true;
-				while(on==true)
-				{
+
+			if (choice.equals("A")) {
+				Scanner yninput = new Scanner(System.in);
+				String yn = "";
+				do {
+					
 					System.out.println("Choose the subject for which you want to edit the grade");
 					System.out.println("1 for JAVA\n2 for C Sharp\n3 for SQL \n4 for PHP");
 					Scanner in = new Scanner(System.in);
-					int ins=0;
+					int ins = 0;
 					try {
-						ins= in.nextInt();
-					}
-					catch(InputMismatchException e)
-					{
+						ins = in.nextInt();
+					} catch (InputMismatchException e) {
 						System.out.println("\nFatal Error! Input mismatch");
 						System.exit(0);
 					}
-					
-					while(true)
-					{
-						if(ins==1) {
-							System.out.println("Current grade for Java is "+db.getSubjectGrade(studentId, "java") + "\nEnter new grade for Java: ");
-							Scanner input2 = new Scanner(System.in);
-							int g2= input2.nextInt();
-							db.editStudentGrade(studentId,"java", g2);	
-							break;
-						}
-						else if(ins==2) {
-							System.out.println("Current grade for C Sharp is "+db.getSubjectGrade(studentId, "csharp") + "\nEnter new grade for C Sharp: ");
-							Scanner input3 = new Scanner(System.in);
-							int g3= input3.nextInt();
-							db.editStudentGrade(studentId,"csharp", g3);
-							break;
-						}
-						else if(ins==3) {
-							 System.out.println("Current grade for SQL is "+db.getSubjectGrade(studentId, "sql") + "\nEnter new grade for SQL: ");
-							Scanner input4 = new Scanner(System.in);
-							int g4= input4.nextInt();
-							db.editStudentGrade(studentId,"sql", g4);
-							break;
-						}
-						else if(ins==4) {
-							System.out.println("Current grade for PHP is "+db.getSubjectGrade(studentId, "php") + "\nEnter new grade for PHP: ");
-							Scanner input5 = new Scanner(System.in);
-							int g5= input5.nextInt();
-							db.editStudentGrade(studentId,"php", g5);
-							break;
-						}
-						else
-						{
-							 System.out.println("Invalid input");
-						}
-						
-						
-					}					
-				
-					
+
+					if (ins == 1) {
+						System.out.println("Current grade for Java is " + db.getSubjectGrade(studentId, "java")
+								+ "\nEnter new grade for Java: ");
+						Scanner input2 = new Scanner(System.in);
+						int g2 = input2.nextInt();
+						db.editStudentGrade(studentId, "java", g2);
+					} else if (ins == 2) {
+						System.out.println("Current grade for C Sharp is " + db.getSubjectGrade(studentId, "csharp")
+								+ "\nEnter new grade for C Sharp: ");
+						Scanner input3 = new Scanner(System.in);
+						int g3 = input3.nextInt();
+						db.editStudentGrade(studentId, "csharp", g3);
+					} else if (ins == 3) {
+						System.out.println("Current grade for SQL is " + db.getSubjectGrade(studentId, "sql")
+								+ "\nEnter new grade for SQL: ");
+						Scanner input4 = new Scanner(System.in);
+						int g4 = input4.nextInt();
+						db.editStudentGrade(studentId, "sql", g4);
+					} else if (ins == 4) {
+						System.out.println("Current grade for PHP is " + db.getSubjectGrade(studentId, "php")
+								+ "\nEnter new grade for PHP: ");
+						Scanner input5 = new Scanner(System.in);
+						int g5 = input5.nextInt();
+						db.editStudentGrade(studentId, "php", g5);
+					} else {
+						System.out.println("Invalid input");
+					}
+
 					System.out.println("Grade updated successfully");
 					System.out.println("Edit (Update) more grades? Y/N: ");
-					Scanner input6 = new Scanner(System.in);
-					String yn = "";
+					//Scanner yninput = new Scanner(System.in);
+					//String yn = "";
 					try {
-						yn = input6.nextLine();
-					}
-					catch(InputMismatchException e)
-					{
+						yn = yninput.nextLine().toLowerCase();
+					} catch (InputMismatchException e) {
 						System.out.println("\nFatal Error! Input mismatch\nLeaving program");
 						System.exit(0);
 					}
-					if(yn.toUpperCase()=="Y")
-					{
-						on=true;
-						continue;
-					}
-					else if(yn.toUpperCase()=="N")
-					{
-						on=false; 
-						break;
-					}
-					else {
-						on=true;
-						 System.out.println("Enter a valid input");
-					}					
-					
-					
+					//if(!(yninput.next().equalsIgnoreCase("Y")))
+					//if(yn.toLowerCase()!="y")
+					//{
+						//break;
+					//}
+
 				}
-				
-				
-			}
-			else if(choice.equals("R"))
-			{
+				while (yn.equals("y"));
+
+			} else if (choice.equals("R")) {
 				System.out.println("Display Student Report\n");
 				printStudents(true);
-			}
-			else if (choice.equals("B")) {
+			} else if (choice.equals("B")) {
 				System.out.println("Going back to main report\n");
 				break;
-			} 
-			else if (choice.equals("X")) {
+			} else if (choice.equals("X")) {
 				System.out.println("Exiting the program\n");
 				System.exit(0);
-			} 
-			
+			}
+
 			else {
 				System.out.println("Wrong option chosen! Please try again.\n");
 			}
-			
+
 		}
-		
+
 	}
 
 	public void printTeachers() {
@@ -355,7 +324,5 @@ public class StartMain {
 			t.print();
 		}
 	}
-	
-	
 
 }

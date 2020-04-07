@@ -71,24 +71,27 @@ public class Student extends Person {
 		}
 	}
 	
-	public void printIndvidualData() {
-		System.out.println("");
-		System.out.println("Report of student "+ this.firstname +" "+this.lastname);
-		System.out.println(pad("Student ID", Integer.toString(this.id)));
-		System.out.println(pad("First Name", this.firstname));
-		System.out.println(pad("Last Name", this.lastname));
-		System.out.println(pad("Age", Integer.toString(this.getAge()) ));
+	public String printIndvidualData(boolean onConsole) {
+		String reportText="";
 		
-		System.out.println("");
+		reportText+="\nReport of student "+ this.firstname +" "+this.lastname;
+		reportText+="\n";
+		reportText+=(pad("\nStudent ID", Integer.toString(this.id)));
+		reportText+=(pad("\nFirst Name", this.firstname));
+		reportText+=(pad("\nLast Name", this.lastname));
+		reportText+=(pad("\nAge", Integer.toString(this.getAge()) ));
 		
-		System.out.println(pad("Java", Integer.toString(getGrade(CourseEnum.JAVA)) ));
-		System.out.println(pad("C Sharp", Integer.toString(getGrade(CourseEnum.CSHARP))));
-		System.out.println(pad("SQL", Integer.toString(getGrade(CourseEnum.SQL)) ));
-		System.out.println(pad("PHP", Integer.toString(getGrade(CourseEnum.PHP)) ));
+		reportText+="\n";
+		
+		reportText+=(pad("\nJava", Integer.toString(getGrade(CourseEnum.JAVA)) ));
+		reportText+=(pad("\nC Sharp", Integer.toString(getGrade(CourseEnum.CSHARP))));
+		reportText+=(pad("\nSQL", Integer.toString(getGrade(CourseEnum.SQL)) ));
+		reportText+=(pad("\nPHP", Integer.toString(getGrade(CourseEnum.PHP)) ));
 	
-		System.out.println("");
-		System.out.println(String.format("%15s", "Results"));
-		System.out.println("");
+		reportText+="\n";
+		
+		reportText+=(String.format("%15s", "Results"));
+		reportText+="\n";		
 		
 		String result = "Passed";
 		int retakes =0;
@@ -114,8 +117,15 @@ public class Student extends Person {
 			result="Not passed";
 		}
 		
-		System.out.println(pad("Result", result));
-		System.out.println(pad("Retakes", Integer.toString(retakes) ));
+		reportText+=(pad("Result", result));
+		reportText+="\n";
+		reportText+=(pad("Retakes", Integer.toString(retakes) ));
+		if(onConsole)
+		{
+			System.out.println(reportText);
+		}
+		
+		return reportText;
 	}
 	
 	private String pad(String sub, String grade) {

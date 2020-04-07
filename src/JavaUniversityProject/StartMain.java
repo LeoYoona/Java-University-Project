@@ -1,5 +1,6 @@
 package JavaUniversityProject;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -91,11 +92,42 @@ public class StartMain {
 		else if (choice.equals("T")) {
 			printTeachers();
 		} 
-		else if (choice.equals("R") && (loggedInUser.accesslvl == UserAccessLevel.Editor) ) {
+		else if (choice.equals("V") && (loggedInUser.accesslvl == UserAccessLevel.Admin)) {
+			while (true) {
+				System.out.println("\nEnter student ID to save report | Type 101 to save all reports | type 0 to go back to main menu: ");
+				Scanner input = new Scanner(System.in);
+				int id;
+				try {
+					id = input.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("\nFatal Error! Input is not an Integer.\n");
+					break;
+				}
+
+				boolean idExists = true;
+				if ((id) == 0) {
+					break;
+				}
+				else if(id==101)
+				{
+					db.saveAllReportsAsDoc();
+					System.out.println("All student reports saved to Documents >student_reports");
+				}
+				else {
+					idExists = db.saveReportAsDoc(id);
+					System.out.println("Report saved to Documents >student_reports");
+					if (!(idExists)) {
+						System.out.println("Invalid ID! Please try again.\n");
+					}
+				}
+			}
+
+		}
+		else if (choice.equals("R") && ((loggedInUser.accesslvl == UserAccessLevel.Editor) || (loggedInUser.accesslvl == UserAccessLevel.Admin) ) ) {
 			
 				printStudents(true);
 		}
-		else if (choice.equals("A") && (loggedInUser.accesslvl == UserAccessLevel.Editor) ) {
+		else if (choice.equals("A") && ((loggedInUser.accesslvl == UserAccessLevel.Editor) || (loggedInUser.accesslvl == UserAccessLevel.Admin) ) ) {
 			System.out.println("ADD A STUDENT\n");	
 			
 			System.out.print("Choose a username: ");
@@ -183,7 +215,7 @@ public class StartMain {
 		
 		while(includeGrades==true)
 		{
-			System.out.println("\nEnter student ID (Report Deatils) | type 0 to go backto main menu: ");
+			System.out.println("\nEnter student ID (Report Deatils) | type 0 to go back to main menu: ");
 			Scanner input = new Scanner(System.in);
 			int choice=0;
 			try {
@@ -214,8 +246,10 @@ public class StartMain {
 		}
 	}
 	
+
 	
-	@SuppressWarnings({ "resource", "unused" })
+	
+	@SuppressWarnings({ "resource" })
 	public void reportEdit(Database db, int studentId) {
 		while (true) {
 			System.out.println(

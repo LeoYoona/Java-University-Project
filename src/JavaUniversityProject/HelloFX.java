@@ -19,7 +19,7 @@ import JavaUniversityProject.javafx.layout.MenuMainWindow;
 import JavaUniversityProject.model.Role;*/
 
 
-
+@SuppressWarnings("unused")
 public class HelloFX extends Application {
 	public static void main(String[] args) {
 		launch();

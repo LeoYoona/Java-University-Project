@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-
+//no class path and project files in the final jar
 public class StartMain {
 
 	Database db;

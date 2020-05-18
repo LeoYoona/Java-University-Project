@@ -81,6 +81,10 @@ public class StartMain {
 		System.out.println("Enter choice: ");
 		String choice = input.nextLine();
 		return choice.toUpperCase();
+		
+		/*
+			I am admiring his perfect bunny teeth I need this video for scientific research do the honours @get
+		 */
 	}
 
 	// this will show the output according to user's choice
@@ -186,7 +190,6 @@ public class StartMain {
 		
 		return true;
 	}
-
 	@SuppressWarnings("resource")
 	public void printStudents(boolean includeGrades) {
 

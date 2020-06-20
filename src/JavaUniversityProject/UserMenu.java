@@ -27,7 +27,7 @@ import javafx.util.Duration;
 @SuppressWarnings("unused")
 public class UserMenu {
 	/*
-	 * https://www.youtube.com/watch?v=r_dDKrx-aKc ecplise short cuts. ctrl+shift+/
+	 * ecplise short cuts. ctrl+shift+/
 	 * to comment ctrl+sift+f to indent code ctrl+alt+down-arrow to copy seleted
 	 * code to the next line/down *
 	 */
@@ -57,9 +57,9 @@ public class UserMenu {
 			public void handle(ActionEvent e) {
 				window.close();
 				if (loggedInUser.accesslvl == UserAccessLevel.Basic) {
-					new DisplayStudents(db, false, window);
+					new DisplayPersons(db, false, window, "student",loggedInUser);
 				} else {
-					new DisplayStudents(db, true, window);
+					new DisplayPersons(db, true, window, "student",loggedInUser);
 				}
 			}
 		});
@@ -67,14 +67,36 @@ public class UserMenu {
 		Button viewTeachers = new Button();
 		viewTeachers.setText("Display Teachers");
 		GridPane.setConstraints(viewTeachers, 0, 3); // 2nd col , 1st row
+		viewTeachers.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				new DisplayPersons(db, true, window, "teacher",loggedInUser);
+			}
+		});
 
 		Button addStudents = new Button();
 		addStudents.setText("Add Students");
 		GridPane.setConstraints(addStudents, 0, 4); // 2nd col , 1st row
+		addStudents.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				new AddStudent(db, window,loggedInUser);
+			}
+		});
+		
 
 		Button displayReports = new Button();
 		displayReports.setText("Display Student's Reports");
 		GridPane.setConstraints(displayReports, 0, 5); // 2nd col , 1st row
+		displayReports.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				new viewEditReports(db, window, loggedInUser);
+			}
+		});
 
 		Button saveReports = new Button();
 		saveReports.setText("Save Student's Reports to PC");
@@ -83,6 +105,13 @@ public class UserMenu {
 		Button exit = new Button();
 		exit.setText("Exit");
 		GridPane.setConstraints(exit, 0, 7); // 2nd col , 1st row
+		exit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				
+			}
+		});
 
 		gridPane.setAlignment(Pos.CENTER);
 		// window.setCenter(gridPane);

@@ -71,6 +71,7 @@ public class Student extends Person {
 		}
 	}
 	
+	
 	public String printIndvidualData(boolean onConsole) {
 		String reportText="";
 		

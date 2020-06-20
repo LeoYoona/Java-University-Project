@@ -26,7 +26,7 @@ public class StartMain {
 		/* ecplise short cuts. 
 		 * ctrl+shift+/ to comment
 		 * ctrl+sift+f to indent code 
-		 * ctrl+alt+down-arrow to copy seleted code to the next line/down		 * 
+		 * ctrl+alt+down-arrow to copy seleted code to the next line/down * 
 		 */
 		db = new Database();
 		Scanner input = new Scanner(System.in);

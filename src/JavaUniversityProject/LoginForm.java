@@ -70,7 +70,7 @@ public class LoginForm extends Application {
 		
 		gridPane.getChildren().addAll(userLabel, userInput, passwordLabel, passwordField, loginButton,lblMessage);
 
-		Scene scene = new Scene(gridPane, 300, 200);
+		Scene scene = new Scene(gridPane, 350, 200);
 		window.setScene(scene);
 		window.show();
 

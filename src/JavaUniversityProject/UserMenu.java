@@ -101,6 +101,13 @@ public class UserMenu {
 		Button saveReports = new Button();
 		saveReports.setText("Save Student's Reports to PC");
 		GridPane.setConstraints(saveReports, 0, 6); // 2nd col , 1st row
+		saveReports.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				new saveReport(db, window,loggedInUser);
+			}
+		});
 
 		Button exit = new Button();
 		exit.setText("Exit");

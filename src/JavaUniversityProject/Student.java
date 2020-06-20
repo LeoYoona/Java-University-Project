@@ -6,6 +6,8 @@ import java.util.Hashtable;
 public class Student extends Person {
 	String group;	
 	Course course;	
+	int retakes;
+	String result;
 	CourseEnum courseName;	
 	Hashtable<CourseEnum, Integer> gradedCourses;
 	
@@ -127,6 +129,33 @@ public class Student extends Person {
 		}
 		
 		return reportText;
+	}
+	
+	public void getResultRetakes()
+	{
+		this.result = "Passed";
+		this.retakes = 0;
+		if(getGrade(CourseEnum.JAVA)<55)
+		{
+			retakes++;
+		}
+		if(getGrade(CourseEnum.CSHARP)<55)
+		{
+			retakes++;
+		}
+		if(getGrade(CourseEnum.SQL)<55)
+		{
+			retakes++;
+		}
+		if(getGrade(CourseEnum.PHP) <55)
+		{
+			retakes++;
+		}
+		
+		if(retakes > 0)
+		{
+			result="Not passed";
+		}
 	}
 	
 	private String pad(String sub, String grade) {

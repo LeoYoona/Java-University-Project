@@ -52,7 +52,7 @@ public class viewEditReports {
 
 		window.setTitle("Student Report");
 		displayReports();
-		
+
 		window.show();
 	}
 
@@ -65,25 +65,25 @@ public class viewEditReports {
 
 		Label ln = new Label("Last Name");
 		GridPane.setConstraints(ln, 2, 0);
-		
+
 		Label gradesJ = new Label("JAVA Grades");
 		GridPane.setConstraints(gradesJ, 3, 0);
-		
+
 		Label gradesC = new Label("C# Grades");
 		GridPane.setConstraints(gradesC, 4, 0);
-		
+
 		Label gradesS = new Label("SQL Grades");
 		GridPane.setConstraints(gradesS, 5, 0);
-		
+
 		Label gradesP = new Label("PHP Grades");
 		GridPane.setConstraints(gradesP, 6, 0);
-		
-		gridPane.getChildren().addAll(id, fn, ln,gradesJ, gradesC, gradesS, gradesP);
+
+		gridPane.getChildren().addAll(id, fn, ln, gradesJ, gradesC, gradesS, gradesP);
 
 		ArrayList<Student> students = db.getStudents();
 		Scene scene;
 		int row = 1;
-		
+
 		for (Student s : students) {
 
 			Label labelId = new Label(String.valueOf(s.id));
@@ -96,7 +96,7 @@ public class viewEditReports {
 			GridPane.setConstraints(labelLn, 2, row);
 
 			gridPane.getChildren().addAll(labelId, labelFn, labelLn);
-			
+
 			Label grades_J = new Label(Integer.toString(s.getGrade(CourseEnum.JAVA)));
 			GridPane.setConstraints(grades_J, 3, row);
 
@@ -113,10 +113,10 @@ public class viewEditReports {
 
 			row++;
 		}
-		
+
 		ScrollPane sp = new ScrollPane();
 		sp.setPannable(true);
-		
+
 		// to view individual student report
 
 		Label lblStudentHead = new Label();
@@ -138,10 +138,10 @@ public class viewEditReports {
 			@Override
 			public void handle(ActionEvent event) {
 
-				displayIndividualReports(Integer.valueOf(input.getText())) ;
+				displayIndividualReports(Integer.valueOf(input.getText()));
 			}
 		});
-		
+
 		Button backBtn = new Button();
 		backBtn.setText("Back");
 		GridPane.setConstraints(backBtn, 1, row + 6);
@@ -154,13 +154,15 @@ public class viewEditReports {
 			}
 		});
 
-		gridPane.getChildren().addAll(backBtn,lblStudent, input, indiReport, lblStudentHead);
+		gridPane.getChildren().addAll(backBtn, lblStudent, input, indiReport, lblStudentHead);
 		scene = new Scene(gridPane, 800, 400); // W, H
 		window.setScene(scene);
 	}
-	
+
 	public void displayIndividualReports(int id) {
-		
+
+		window.setTitle("Individual Student Report");
+
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		studentList = db.getStudents();
 
@@ -170,50 +172,66 @@ public class viewEditReports {
 				GridPane.setConstraints(id1, 0, 0); // c, r
 
 				Label fn = new Label("First Name");
-				GridPane.setConstraints(fn, 0,1);
+				GridPane.setConstraints(fn, 0, 1);
 
 				Label ln = new Label("Last Name");
-				GridPane.setConstraints(ln, 0,2);
-				
+				GridPane.setConstraints(ln, 0, 2);
+
 				Label gradesJ = new Label("JAVA Grades");
-				GridPane.setConstraints(gradesJ, 0,3);
-				
+				GridPane.setConstraints(gradesJ, 0, 3);
+
 				Label gradesC = new Label("C# Grades");
-				GridPane.setConstraints(gradesC, 0,4);
-				
+				GridPane.setConstraints(gradesC, 0, 4);
+
 				Label gradesS = new Label("SQL Grades");
-				GridPane.setConstraints(gradesS, 0,5);
-				
+				GridPane.setConstraints(gradesS, 0, 5);
+
 				Label gradesP = new Label("PHP Grades");
-				GridPane.setConstraints(gradesP, 0,6);
-				
-				
+				GridPane.setConstraints(gradesP, 0, 6);
+
 				Label labelId = new Label(String.valueOf(s.id));
-				GridPane.setConstraints(labelId,1,0); // 1st col , nth row
+				GridPane.setConstraints(labelId, 1, 0); // 1st col , nth row
 
 				Label labelFn = new Label(s.firstname);
-				GridPane.setConstraints(labelFn, 1,1);
+				GridPane.setConstraints(labelFn, 1, 1);
 
 				Label labelLn = new Label(s.lastname);
-				GridPane.setConstraints(labelLn, 1,2);
+				GridPane.setConstraints(labelLn, 1, 2);
 
-				gridPane.getChildren().addAll();
-				
 				Label grades_J = new Label(Integer.toString(s.getGrade(CourseEnum.JAVA)));
-				GridPane.setConstraints(grades_J, 1,3);
+				GridPane.setConstraints(grades_J, 1, 3);
 
 				Label grades_C = new Label(Integer.toString(s.getGrade(CourseEnum.CSHARP)));
-				GridPane.setConstraints(grades_C, 1,4);
+				GridPane.setConstraints(grades_C, 1, 4);
 
 				Label grades_S = new Label(Integer.toString(s.getGrade(CourseEnum.SQL)));
-				GridPane.setConstraints(grades_S, 1,5);
+				GridPane.setConstraints(grades_S, 1, 5);
 
 				Label grades_P = new Label(Integer.toString(s.getGrade(CourseEnum.PHP)));
-				GridPane.setConstraints(grades_P,1,6);
+				GridPane.setConstraints(grades_P, 1, 6);
 				
+				s.getResultRetakes();
+				
+				Label result = new Label("Result: "+s.result);
+				GridPane.setConstraints(result, 0, 7);
+				
+				Label retakes = new Label(Integer.toString(s.retakes)+" retake(s)");
+				GridPane.setConstraints(retakes, 1, 7);
+
+				Button editGr = new Button();
+				editGr.setText("Edit Subject Grades");
+				GridPane.setConstraints(editGr, 0, 9);
+				editGr.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+
+						editReportGrades(id, s.firstname + " " + s.lastname,s);
+					}
+				});
+
 				Button backBtn = new Button();
 				backBtn.setText("Back");
-				GridPane.setConstraints(backBtn, 0, 8);
+				GridPane.setConstraints(backBtn, 0, 11);
 				backBtn.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
@@ -222,18 +240,104 @@ public class viewEditReports {
 						new UserMenu(db, loggedInUser, window);
 					}
 				});
-				
+
 				gridPane.getChildren().clear();
-				gridPane.getChildren().addAll(id1, fn, ln,gradesJ, gradesC, gradesS, gradesP
-						,labelId, labelFn, labelLn,grades_J, grades_C, grades_S, grades_P,backBtn);
-				
-				
-				
+				gridPane.getChildren().addAll(id1, fn, ln, gradesJ, gradesC, gradesS, gradesP, labelId, labelFn,
+						labelLn, grades_J, grades_C, grades_S, grades_P, backBtn, editGr,result,retakes);
+
 				window.setTitle("Individual Student Report");
-				
+
 			}
 		}
+
 	}
-	
+
+	public void editReportGrades(int id, String name, Student s) {
+		window.setTitle("Edit Grades for subjects");
+
+		Label lblGrdJ = new Label();
+		lblGrdJ.setText("Java Grade");
+		GridPane.setConstraints(lblGrdJ, 0, 0); // c,r
+
+		TextField inputJ = new TextField();
+		inputJ.setPromptText(Integer.toString(s.getGrade(CourseEnum.JAVA)));
+		GridPane.setConstraints(inputJ, 1, 0);
+
+		Label lblGrdC = new Label();
+		lblGrdC.setText("C# Grade");
+		GridPane.setConstraints(lblGrdC, 0, 1);
+
+		TextField inputC = new TextField();
+		inputC.setPromptText(Integer.toString(s.getGrade(CourseEnum.CSHARP)));
+		GridPane.setConstraints(inputC, 1, 1);
+
+		Label lblGrdS = new Label();
+		lblGrdS.setText("SQL Grade");
+		GridPane.setConstraints(lblGrdS, 0, 2);
+
+		TextField inputS = new TextField();
+		inputS.setPromptText(Integer.toString(s.getGrade(CourseEnum.SQL)));
+		GridPane.setConstraints(inputS, 1, 2);
+
+		Label lblGrdP = new Label();
+		lblGrdP.setText("PHP Gr");
+		GridPane.setConstraints(lblGrdP, 0, 3);
+
+		TextField inputP = new TextField();
+		inputP.setPromptText(Integer.toString(s.getGrade(CourseEnum.PHP)));
+		GridPane.setConstraints(inputP, 1, 3);
+
+		Button save = new Button();
+		save.setText("Save Changes");
+		GridPane.setConstraints(save, 0, 5);
+		save.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+
+				if (!(inputJ.getText().isEmpty())) {
+					db.editStudentGrade(id, "java", Integer.parseInt(inputJ.getText()));
+				}
+
+				if (!(inputC.getText().isEmpty())) {
+					db.editStudentGrade(id, "csharp", Integer.parseInt(inputC.getText()));
+				}
+
+				if (!(inputS.getText().isEmpty())) {
+					db.editStudentGrade(id, "sql", Integer.parseInt(inputS.getText()));
+				}
+
+				if (!(inputP.getText().isEmpty())) {
+					db.editStudentGrade(id, "php", Integer.parseInt(inputP.getText()));
+				}
+
+				{
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setTitle("Succesful");
+					alert.setHeaderText("Grades updates successfully");
+					alert.showAndWait();
+				}
+				
+				inputJ.setText("");
+				inputC.setText("");
+				inputS.setText("");
+				inputP.setText("");
+			}
+		});
+
+		Button backBtn = new Button();
+		backBtn.setText("Back");
+		GridPane.setConstraints(backBtn, 0, 7);
+		backBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+
+				window.close();
+				new UserMenu(db, loggedInUser, window);
+			}
+		});
+
+		gridPane.getChildren().clear();
+		gridPane.getChildren().addAll(lblGrdJ, lblGrdC, lblGrdS, lblGrdP, inputJ, inputC, inputS, inputP, backBtn,save);
+	}
 
 }

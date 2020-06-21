@@ -100,7 +100,7 @@ public class UserMenu {
 
 		Button saveReports = new Button();
 		saveReports.setText("Save Student's Reports to PC");
-		GridPane.setConstraints(saveReports, 0, 6); // 2nd col , 1st row
+		GridPane.setConstraints(saveReports, 0, 6); 
 		saveReports.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -108,10 +108,23 @@ public class UserMenu {
 				new saveReport(db, window,loggedInUser);
 			}
 		});
+		
+		Button logout = new Button();
+		logout.setText("Logout");
+		GridPane.setConstraints(logout, 0, 7); 
+		logout.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				Stage stage = new Stage();
+				LoginForm lg = new LoginForm();
+				lg.start(stage);
+			}
+		});
 
 		Button exit = new Button();
 		exit.setText("Exit");
-		GridPane.setConstraints(exit, 0, 7); // 2nd col , 1st row
+		GridPane.setConstraints(exit, 0, 8);
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -124,7 +137,7 @@ public class UserMenu {
 		// window.setCenter(gridPane);
 
 		// add label to vbox
-		gridPane.getChildren().addAll(label, viewStudents, viewTeachers, addStudents, displayReports, saveReports,
+		gridPane.getChildren().addAll(label, viewStudents, viewTeachers, addStudents, displayReports, saveReports,logout,
 				exit);
 
 		if ((loggedInUser.accesslvl == UserAccessLevel.Basic)) // for students remove the following controls

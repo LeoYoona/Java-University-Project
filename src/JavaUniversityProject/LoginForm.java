@@ -48,11 +48,11 @@ public class LoginForm extends Application {
 		gridPane.setHgap(8); // Horizontal spacing between grid items
 
 		Label userLabel = new Label();
-		userLabel.setText("Username:");
+		userLabel.setText("User email:");
 		GridPane.setConstraints(userLabel, 0, 0);  // 1st column, 1st row
 
 		TextField userInput = new TextField();
-		userInput.setPromptText("username");
+		userInput.setPromptText("user email");
 		GridPane.setConstraints(userInput, 1, 0); //2nd col , 1st row
 
 		Label passwordLabel = new Label("Password");
@@ -68,7 +68,18 @@ public class LoginForm extends Application {
 		loginButton.setText("Log in");
 		GridPane.setConstraints(loginButton, 1, 4);
 		
-		gridPane.getChildren().addAll(userLabel, userInput, passwordLabel, passwordField, loginButton,lblMessage);
+		Button exit = new Button();
+		exit.setText("Exit");
+		GridPane.setConstraints(exit, 1,5);
+		exit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				window.close();
+				
+			}
+		});
+		
+		gridPane.getChildren().addAll(userLabel, userInput, passwordLabel, passwordField, loginButton,lblMessage,exit);
 
 		Scene scene = new Scene(gridPane, 350, 200);
 		window.setScene(scene);

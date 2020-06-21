@@ -25,25 +25,25 @@ public class Database {
 
 	private void createUsers() {
 		// list of students
-		addStudent("Rabiah", "Ali", "s1", "s01", ids + 1, LocalDate.of(1996, 05, 8), "IT-02-A");
-		addStudent("Salihah", "Alabrash", "s2", "s02", ids + 2, LocalDate.of(1997, 6, 7), "IT-02-A");
-		addStudent("Valerio", "Perra", "s3", "s03", ids + 3, LocalDate.of(1998, 7, 21), "IT-02-A");
-		addStudent("Tiziano", "Maiolo", "s4", "s04", ids + 4, LocalDate.of(1999, 8, 29), "IT-02-A");
-		addStudent("Hyejin", "Ryu", "s5", "s05", ids + 5, LocalDate.of(2000, 9, 28), "IT-02-A");
-		addStudent("Jisung", "Hwa", "s6", "s06", ids + 6, LocalDate.of(2001, 10, 27), "IT-02-A");
+		addStudent("Rabiah", "Ali", "s1@inhmail.com", "s01", ids + 1, LocalDate.of(1996, 05, 8), "IT-02-A");
+		addStudent("Salihah", "Alabrash", "s2@inhmail.com", "s02", ids + 2, LocalDate.of(1997, 6, 7), "IT-02-A");
+		addStudent("Valerio", "Perra", "s3@inhmail.com", "s03", ids + 3, LocalDate.of(1998, 7, 21), "IT-02-A");
+		addStudent("Tiziano", "Maiolo", "s4@inhmail.com", "s04", ids + 4, LocalDate.of(1999, 8, 29), "IT-02-A");
+		addStudent("Hyejin", "Ryu", "s5@inhmail.com", "s05", ids + 5, LocalDate.of(2000, 9, 28), "IT-02-A");
+		addStudent("Jisung", "Hwa", "s6@inhmail.com", "s06", ids + 6, LocalDate.of(2001, 10, 27), "IT-02-A");
 
 		// list of teachers
-		addTeacher("IlSung", "Sam", "t1", "t01", ids + 7, LocalDate.of(1965, 6, 15), 8000.0);
-		addTeacher("Kamatari", "Kawai", "t2", "t02", ids + 8, LocalDate.of(1975, 7, 5), 5200.0);
-		addTeacher("Xionglong", "Liu", "t3", "t03", ids + 9, LocalDate.of(1985, 3, 6), 2200.0);
-		addTeacher("Fayha", "Barbery", "t4", "t04", ids + 10, LocalDate.of(1995, 1, 4), 6200.0);
-		addTeacher("Hassiba", "Zafrani", "t5", "t05", ids + 11, LocalDate.of(1983, 5, 7), 5800.0);
-		addTeacher("Malvika", "Randhawa", "t6", "t06", ids + 12, LocalDate.of(1985, 10, 25), 9000.0);
+		addTeacher("IlSung", "Sam", "t1@inhmail.com", "t01", ids + 7, LocalDate.of(1965, 6, 15), 8000.0);
+		addTeacher("Kamatari", "Kawai", "t2@inhmail.com", "t02", ids + 8, LocalDate.of(1975, 7, 5), 5200.0);
+		addTeacher("Xionglong", "Liu", "t3@inhmail.com", "t03", ids + 9, LocalDate.of(1985, 3, 6), 2200.0);
+		addTeacher("Fayha", "Barbery", "t4@inhmail.com", "t04", ids + 10, LocalDate.of(1995, 1, 4), 6200.0);
+		addTeacher("Hassiba", "Zafrani", "t5@inhmail.com", "t05", ids + 11, LocalDate.of(1983, 5, 7), 5800.0);
+		addTeacher("Malvika", "Randhawa", "t6@inhmail.com", "t06", ids + 12, LocalDate.of(1985, 10, 25), 9000.0);
 
 		// add managers
 
-		addManager("Kim", "Namjoon", "m1", "m01", ids + 13, LocalDate.of(1994, 9, 12));
-		addManager("Kim", "Seokjin", "m2", "m02", ids + 14, LocalDate.of(1992, 12, 4));
+		addManager("Kim", "Namjoon", "m1@inhmail.com", "m01", ids + 13, LocalDate.of(1994, 9, 12));
+		addManager("Kim", "Seokjin", "m2@inhmail.com", "m02", ids + 14, LocalDate.of(1992, 12, 4));
 
 		updateID(ids + 14);
 	}
@@ -100,26 +100,8 @@ public class Database {
 		return studentList;
 	}
 
-	public boolean printIndividualStudentReport(int choice) {
-		boolean tf = false;
-
-		ArrayList<Student> studentList = new ArrayList<Student>();
-		studentList = getStudents();
-
-		for (Student s : studentList) {
-			if (s.id == choice) {
-				System.out.println();
-				String all = s.printIndvidualData(true);
-				//printTextInFile(all, s.firstname+" "+s.lastname);
-				tf = true;
-			}
-		}
-
-		return tf;
-
-	}
 	
-	@SuppressWarnings("resource")
+	
 	public boolean saveReportAsDoc(int id) {
 		boolean tf = false;
 		ArrayList<Student> studentList = new ArrayList<Student>();
@@ -127,8 +109,8 @@ public class Database {
 
 		for (Student s : studentList) {
 			if (s.id == id) {
-				System.out.println();
-				String all = s.printIndvidualData(false);
+				//System.out.println();
+				String all = s.printIndvidualData();
 				printTextInFile(all, s.firstname+"_"+s.lastname+"_report");
 				tf = true;
 			}
@@ -142,7 +124,7 @@ public class Database {
 		for (Student s : studentList) {
 			{
 				String all ="\n\n"+ (String.format("%15s", "Student report"));
-				all += s.printIndvidualData(false);
+				all += s.printIndvidualData();
 				printTextInFile(all, s.firstname+"_"+s.lastname+"_report");
 			}
 		}
@@ -159,10 +141,6 @@ public class Database {
 			File file = new File(path.toString() + "\\"+studentName+".doc");
 			// Create the file
 			file.createNewFile();
-			/*
-			 * if (file.createNewFile()) { System.out.println("File is created!"); } else {
-			 * System.out.println("File already exists."); }
-			 */
 			
 			// Write Content
 			FileWriter writer = new FileWriter(file);

@@ -53,11 +53,11 @@ public class AddStudent {
 	}
 	
 	public void createNewStudent() {
-		Label uname = new Label("User name");
+		Label uname = new Label("User email");
 		GridPane.setConstraints(uname, 0, 0); // c, r
 		
 		TextField inputUn = new TextField();
-		inputUn.setPromptText("For Eg: yn123");
+		inputUn.setPromptText("For Eg: yn123@inhmail.com");
 		GridPane.setConstraints(inputUn,1,0);
 		
 		Label pwd = new Label("Password");

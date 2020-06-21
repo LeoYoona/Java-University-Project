@@ -111,11 +111,7 @@ public class saveReport {
 				txt1.setText("");
 			}
 		});
-		/*
-		 * if (!(txt1.getText().isEmpty())) {
-		 * 
-		 * }
-		 */
+		
 
 		gridPane.getChildren().addAll(lbl1, lbl2, txt1, btn1, btn2);
 	}

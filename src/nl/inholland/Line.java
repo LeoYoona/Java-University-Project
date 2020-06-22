@@ -40,14 +40,17 @@ public class Line {
 
 	public Line(Stage window) {
 		try {
-			File myObj = new File(
-					"C:\\Users\\avtarsingh\\Documents\\GitHub\\Java-University-Project\\src\\nl\\inholland\\lines.dat");
+//			File myObj = new File(
+//					"C:\\Users\\avtarsingh\\Documents\\GitHub\\Java-University-Project\\src\\nl\\inholland\\lines.dat");
+			File myObj = new File((System.getProperty("user.dir")+"\\src\\nl\\inholland\\lines.dat"));
+			
 			Scanner myReader = new Scanner(myObj);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
-				this.text = data;
-				openModal(window);
+				this.text += data;
+				this.text += "\n";
 			}
+			openModal(window);
 			myReader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("An error occurred.");
@@ -61,7 +64,7 @@ public class Line {
         StackPane secondaryLayout = new StackPane();
         secondaryLayout.getChildren().add(secondLabel);
 
-        Scene secondScene = new Scene(secondaryLayout, 230, 100);
+        Scene secondScene = new Scene(secondaryLayout, 900, 900);
 
         // New window (Stage)
         Stage newWindow = new Stage();

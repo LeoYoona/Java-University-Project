@@ -44,7 +44,7 @@ public class LoginForm extends Application {
 	@Override
 	public void start(Stage window) {
 		db = new Database();
-		//new Line();
+		
 		
 		window.setTitle("Login University System");
 		GridPane gridPane = new GridPane();

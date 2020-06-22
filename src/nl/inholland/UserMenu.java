@@ -21,7 +21,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 @SuppressWarnings("unused")
@@ -33,10 +35,12 @@ public class UserMenu {
 	 */
 	Database db;
 	Person loggedInUser;
+	Stage window;
 
 	public UserMenu(Database dataB, Person loggedInUsr, Stage window) {
 		this.db = dataB;
 		this.loggedInUser = loggedInUsr;
+		this.window=window;
 		window.setTitle("User Management");
 
 		GridPane gridPane = new GridPane();
@@ -111,7 +115,7 @@ public class UserMenu {
 		
 		Button logout = new Button();
 		logout.setText("Logout");
-		GridPane.setConstraints(logout, 0, 7); 
+		GridPane.setConstraints(logout, 0, 8); 
 		logout.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -121,15 +125,27 @@ public class UserMenu {
 				lg.start(stage);
 			}
 		});
+		
+		Button About = new Button();
+		About.setText("About");
+		GridPane.setConstraints(About, 0, 7); // 2nd col , 1st row
+		About.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				
+				window.close();
+				new About(window);
+			}
+		});
+
 
 		Button exit = new Button();
 		exit.setText("Exit");
-		GridPane.setConstraints(exit, 0, 8);
+		GridPane.setConstraints(exit, 0, 9);
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				window.close();
-				
 			}
 		});
 
@@ -137,7 +153,7 @@ public class UserMenu {
 		// window.setCenter(gridPane);
 
 		// add label to vbox
-		gridPane.getChildren().addAll(label, viewStudents, viewTeachers, addStudents, displayReports, saveReports,logout,
+		gridPane.getChildren().addAll(label, viewStudents, viewTeachers, addStudents, displayReports, saveReports,logout,About,
 				exit);
 
 		if ((loggedInUser.accesslvl == UserAccessLevel.Basic)) // for students remove the following controls
@@ -150,5 +166,68 @@ public class UserMenu {
 		Scene scene = new Scene(gridPane, 400, 400);
 		window.setScene(scene);
 		window.show();
+		
+		//close confirmation 
+		window.setOnCloseRequest((WindowEvent event1) -> {
+			{ 
+
+				GridPane secondaryLayout = new GridPane();
+				secondaryLayout.setPadding(new Insets(10, 10, 10, 10));
+				secondaryLayout.setVgap(10); // Vertical spacing between grid items
+				secondaryLayout.setHgap(8); // Horizontal spacing between grid items
+				
+	            Scene secondScene = new Scene(secondaryLayout, 230, 80); //w,h
+	 
+	            // New window (Stage)
+	            Stage newWindow = new Stage();
+	            newWindow.setTitle("INFO");
+	            newWindow.setScene(secondScene);
+	 
+	            // Specifies the modality for new window.
+	            newWindow.initModality(Modality.WINDOW_MODAL);
+	 
+	            // Specifies the owner Window (parent) for new window
+	            newWindow.initOwner(window);
+	 
+	            // Set position of second window, related to primary window.
+	            newWindow.setX(window.getX() + 200);
+	            newWindow.setY(window.getY() + 100);
+	            
+				Label secondLabel = new Label("Close the window?");
+				GridPane.setConstraints(secondLabel, 0, 0);
+				
+				Button btnOk = new Button();
+				GridPane.setConstraints(btnOk, 0, 1);
+				
+				btnOk.setText("OK");
+				btnOk.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+
+						window.close();
+					}
+				});
+				
+				Button cancelBtn = new Button();
+				GridPane.setConstraints(cancelBtn, 1, 1);
+				
+				cancelBtn.setText("Cancel");
+				cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+
+						newWindow.close();
+						new UserMenu(db,loggedInUser,window );
+					}
+				});
+				
+	            
+	            secondaryLayout.getChildren().addAll(btnOk,cancelBtn,secondLabel);
+	 
+	            newWindow.showAndWait();
+			}
+	       
+	    });
 	}
+	
 }

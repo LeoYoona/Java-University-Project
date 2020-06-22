@@ -1,4 +1,4 @@
-package JavaUniversityProject;
+package nl.inholland;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;

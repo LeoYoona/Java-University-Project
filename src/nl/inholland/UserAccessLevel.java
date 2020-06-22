@@ -1,4 +1,4 @@
-package JavaUniversityProject;
+package nl.inholland;
 
 public enum UserAccessLevel {
 	

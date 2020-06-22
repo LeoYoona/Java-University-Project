@@ -1,4 +1,4 @@
-package JavaUniversityProject;
+package nl.inholland;
 
 import java.util.Scanner;
 

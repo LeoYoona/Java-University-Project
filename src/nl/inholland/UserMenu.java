@@ -1,4 +1,4 @@
-package JavaUniversityProject;
+package nl.inholland;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
